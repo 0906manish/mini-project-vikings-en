@@ -1,0 +1,121 @@
+
+from vikingsClasses import Soldier, Viking, Saxon, War
+import random
+
+
+soldier_names = ["albert","andres","archie","dani", "david","gerard","german","graham","imanol","laura","Isis", "Harman","Alex","Fernando","Suzana","Marius","Sheetansh","Alajendra","Anne","Janet","Eric","Eya","Aitor", "Ana"]
+
+def viking_team():
+    viking = []
+    for name in soldier_names:
+        if len(viking) < 4:
+            viking.append(name)
+    for x in viking:
+        if x in soldier_names:
+            soldier_names.remove(x) 
+    return viking       
+viking_1 = viking_team()
+viking_2 = viking_team()
+viking_3 = viking_team()
+vikingteam = [viking_1, viking_2, viking_3]
+
+def saxons_team():
+    saxons = []
+    for name in soldier_names:
+        if len(saxons) < 4:
+            saxons.append(name)
+    for x in saxons:
+        if x in soldier_names:
+            soldier_names.remove(x) 
+    return saxons 
+saxons_1= saxons_team()
+saxons_2= saxons_team()
+saxons_3= saxons_team()
+saxonteam = [saxons_1, saxons_2, saxons_3]
+
+great_war1 = War()
+great_war2 = War()
+great_war3 = War()
+great_war = [great_war1, great_war2, great_war3]
+for i in range(0,4):
+    vikingarmy_1 = great_war1.addViking(Viking(viking_1[i], random.randint(0,100), random.randint(0,200)))
+print(great_war1.vikingArmy)    
+for i in range(0,4):
+    vikingarmy_2 = great_war2.addViking(Viking(viking_2[i], random.randint(0,100), random.randint(0,200)))
+print(great_war2.vikingArmy) 
+for i in range(0,4):
+    vikingarmy_3 = great_war3.addViking(Viking(viking_1[i], random.randint(0,100), random.randint(0,200)))
+print(great_war3.vikingArmy) 
+
+for i in range(0,4):
+    saxonarmy_1= great_war1.addSaxon(Saxon(random.randint(0,100), random.randint(0,200)))
+print(great_war1.vikingArmy)    
+for i in range(0,4):
+    saxonarmy_2 = great_war2.addSaxon(Saxon(random.randint(0,100), random.randint(0,200)))
+print(great_war2.vikingArmy) 
+for i in range(0,4):
+    saxonarmy_3= great_war3.addSaxon(Saxon(random.randint(0,100), random.randint(0,200)))
+print(great_war3.vikingArmy) 
+
+round = 0
+vikingsurvivors = []
+saxonsurvivors = []
+for war in great_war:
+    while war.showStatus() == "Vikings and Saxons are still in the thick of battle.":
+        war.attack()  
+        print(f"round: {round} // Viking army: {len(war.vikingArmy)} warriors",f"and Saxon army: {len(war.saxonArmy)} warriors")
+        print(war.showStatus())
+        if vikingteam != []:
+            for survivor in vikingteam:
+                vikingsurvivors.append(survivor)
+        elif saxonteam != [] :
+            for survivor in saxonteam:
+                saxonsurvivors.append(survivor)
+        round += 1
+  
+final_war = War()
+for viking in vikingsurvivors:
+    final_war.addViking(viking)
+for saxon in saxonsurvivors:
+    final_war.addSaxon(saxon)   
+round = 0
+while final_war.showStatus() == "Vikings and Saxons are still in the thick of battle.":
+    final_war.attack
+    print(f"round: {round} // Viking army: {len(final_war.vikingArmy)} warriors",f"and Saxon army: {len(final_war.saxonArmy)} warriors")
+    print(final_war.showStatus())
+    round += 1       
+
+     
+
+        
+
+
+
+      
+
+
+# creating 3 group of vikings choosing randomly of sizes 4, 3, 4 
+
+
+
+
+
+"""
+#Create 5 Vikings
+for i in range(0,5):
+    if i:
+        great_war.addViking(Viking(soldier_names[random.randint(0,9)],100,random.randint(0,100)))
+
+#Create 5 Saxons
+for i in range(0,5):
+    if i:
+        great_war.addSaxon(Saxon(100,random.randint(0,100)))
+    
+round = 0
+while great_war.showStatus() == "Vikings and Saxons are still in the thick of battle.":
+    great_war.vikingAttack()
+    great_war.saxonAttack()
+    print(f"round: {round} // Viking army: {len(great_war.vikingArmy)} warriors",f"and Saxon army: {len(great_war.saxonArmy)} warriors")
+    print(great_war.showStatus())
+    round += 1
+    """
